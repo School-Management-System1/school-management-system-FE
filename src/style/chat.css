@@ -1,0 +1,17 @@
+.friends-box {
+    min-height: 200px;
+    /* background-color: aqua; */
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 50px;
+    /* float: left; */
+}
+
+.chat-box {
+    min-height: 500px;
+    /* margin-bottom: 100px; */
+    /* background-color: gainsboro; */
+    /* width: 500px; */
+}
