@@ -23,6 +23,7 @@ The application was built using:
 - Frontend: React.js, Material Design Bootstrap, React Bootstrap, Pure CSS
 - Backend: Node.js, Express.js
 - Database: MongoDB
+- Tools: Postman, MongoDB Atlas
 
 ## How to Run the Application
 
@@ -41,6 +42,7 @@ password: Test@123
 - [Mohammad Alfayoume](https://github.com/mohammadalfayoume)
 
 
+![1](./src/components/assets/17.png)
 ![1](./src/components/assets/15.png)
 ![1](./src/components/assets/16.png)
 ![1](./src/components/assets/1.png)
