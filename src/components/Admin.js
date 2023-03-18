@@ -39,7 +39,7 @@ const Admin = () => {
           const allUsers = res.data.filter((user) => {
             return !user.isAdmin
           })
-          console.log(res.data)
+          // console.log(res.data)
           setUsers(allUsers)
         })
       } catch (error) {
@@ -90,16 +90,19 @@ const Admin = () => {
                   User
                 </th>
                 <th style={{ maxWidth: '50px' }} scope='col'>
+                  Status
+                </th>
+                <th style={{ maxWidth: '50px' }} scope='col'>
                   Edit / Delete
                 </th>
               </tr>
             </MDBTableHead>
             <MDBTableBody>
               {users.map((user, idx) => {
-                console.log(user['active'])
                 return (
                   <tr key={idx} style={{ textAlign: 'center' }}>
                     <td style={{ maxWidth: '50px' }}>{user['username']}</td>
+                    <td style={{ maxWidth: '50px' }}>{user['active'] ? "Active" : 'Inactive'}</td>
                     <td style={{ maxWidth: '50px' }}>
                       <div
                         style={{

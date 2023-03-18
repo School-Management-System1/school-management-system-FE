@@ -150,6 +150,7 @@ const SetMark = () => {
                       onChange={handleOptionChange}
                       aria-label='Default select example'
                     >
+                      <option selected></option>
                       {coursess.map((course, idx) => {
                         return (
                           <option value={course._id}>{course.subject}</option>
@@ -168,6 +169,7 @@ const SetMark = () => {
                       onChange={handleUserChange}
                       aria-label='Default select example'
                     >
+                      <option selected></option>
                       {users.map((user, idx) => {
                         return <option value={user._id}>{user.username}</option>
                       })}

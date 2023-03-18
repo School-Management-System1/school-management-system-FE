@@ -12,10 +12,16 @@ import {
   MDBModalFooter,
   MDBTextArea,
   MDBInput,
+  MDBCheckbox
 } from 'mdb-react-ui-kit'
 
 const EditUser = (props) => {
   const [basicModal, setBasicModal] = useState(false)
+  const [isActive, setIsActive]= useState(false)
+
+  const handleActiveChange=(e)=>{
+    setIsActive(e.target.checked)
+  }
 
   const handleEditSubmit = (e) => {
     e.preventDefault()
@@ -23,9 +29,9 @@ const EditUser = (props) => {
     let userInfo = {
       username: e.target.username.value,
       email: e.target.email.value,
-      active: e.target.active.value,
+      active: isActive,
     }
-    // console.log(userInfo);
+    console.log(userInfo);
     try {
       const config = {
         headers: {
@@ -90,12 +96,11 @@ const EditUser = (props) => {
                   label='Email'
                   name='email'
                 />
-                <MDBInput
-                  defaultValue={props.user.active}
-                  labelClass='col-form-label'
-                  label='Active'
-                  name='active'
-                />
+                <div style={{display:'flex'}}>
+                <MDBCheckbox onChange={handleActiveChange} name='active' defaultChecked={props.user.active} id='flexCheckDefault' />
+                <label class="form-check-label" for="flexCheckCheckedDisabled">Active</label>
+                </div>
+                
               </MDBModalBody>
 
               <MDBModalFooter>

@@ -150,6 +150,7 @@ const AssignCourse = () => {
                       aria-label='Default select example'
                       defaultValue={courseId}
                     >
+                      <option selected></option>
                       {coursess.map((course, idx) => {
                         return (
                           <option key={idx} value={course._id}>
@@ -171,9 +172,10 @@ const AssignCourse = () => {
                       aria-label='Default select example'
                       defaultValue={userId}
                     >
+                      <option selected></option>
                       {users.map((user, idx) => {
                         return (
-                          <option key={idx} value={user._id} selected>
+                          <option key={idx} value={user._id}>
                             {user.username}
                           </option>
                         )
@@ -184,9 +186,7 @@ const AssignCourse = () => {
               </MDBModalBody>
 
               <MDBModalFooter>
-                {/* <MDBBtn color='secondary'>
-                Close
-              </MDBBtn> */}
+                
                 <MDBBtn>Assign</MDBBtn>
               </MDBModalFooter>
             </form>
