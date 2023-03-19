@@ -3,6 +3,7 @@
     /* background-color: aqua; */
     width: 300px;
     display: flex;
+    /* justify-content: start; */
     flex-direction: column;
     gap: 5px;
     margin-bottom: 50px;

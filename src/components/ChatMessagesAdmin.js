@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
 import {
   MDBContainer,
@@ -16,12 +17,13 @@ import '../style/chat.css'
 
 const ChatMessagesAdmin = (props) => {
   // const [adminId,setAdminId]=useState('')
-  const [allMessages, setAllMessages] = useState([])
+  // const [allMessages, setAllMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [showMessages, setShowMessages] = useState(false)
   const toggleShow = () => setShowMessages(!showMessages)
   const [user_id, setUserId] = useState('')
   const [username, setUsername] = useState('')
+  const [isLoading, setisLoading] = useState(false)
 
   // let username=JSON.parse(localStorage.getItem('username'))
 
@@ -33,6 +35,7 @@ const ChatMessagesAdmin = (props) => {
   }
 
   const handleSendMessage = async (event) => {
+    setisLoading(true)
     event.preventDefault()
     // console.log('sss');
 
@@ -42,18 +45,20 @@ const ChatMessagesAdmin = (props) => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('access'))}`,
         },
       }
-      await axios.post(
+      const res=await axios.post(
         'http://localhost:5000/messages',
         { sender: adminId, receiver: user_id, body: newMessage },
         config
       )
+      props.setAllMessages([...props.allMessages,res.data])
       setNewMessage('')
-      const response = await axios.get(
-        `http://localhost:5000/messages/${user_id}/${adminId}`,
-        config
-      )
-      setAllMessages(response.data)
+      // const response = await axios.get(
+      //   `http://localhost:5000/messages/${user_id}/${adminId}`,
+      //   config
+      // )
+      setisLoading(false)
     } catch (error) {
+      setisLoading(false)
       console.log(error)
     }
   }
@@ -71,7 +76,7 @@ const ChatMessagesAdmin = (props) => {
       axios
         .get(`http://localhost:5000/messages/${adminId}/${user._id}`, config)
         .then((res) => {
-          setAllMessages(res.data)
+          props.setAllMessages(res.data)
           console.log(res.data)
           //   console.log('dd');
         })
@@ -112,7 +117,7 @@ const ChatMessagesAdmin = (props) => {
             marginBottom: '200px',
           }}
         >
-          {allMessages.map((message) => {
+          {props.allMessages.map((message) => {
             return (
               <li className='d-flex justify-content-between mb-4'>
                 <img
@@ -152,9 +157,18 @@ const ChatMessagesAdmin = (props) => {
                 rows={4}
               />
             </li>
+            {
+              isLoading ? (
+                <div style={{ textAlign: 'center', alignContent: 'center' }}>
+                  <Spinner animation='border' role='status'>
+                    <span className='visually-hidden '>Loading...</span>
+                  </Spinner>
+                </div>
+              ) : 
             <MDBBtn type='submit' color='info' rounded className='float-end'>
               Send
             </MDBBtn>
+            }
           </form>
         </div>
       ) : (

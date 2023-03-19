@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +15,7 @@ import Main from './components/Main'
 // import ChatMessages from './components/ChatMessages';
 
 const App = () => {
+  const [allMessages, setAllMessages] = useState([])
   return (
     <div>
       <Router>
@@ -23,8 +24,8 @@ const App = () => {
           <Route path='/' element={<Main />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
-          <Route path='/users' element={<UserPage />} />
-          <Route path='/admin' element={<Admin />} />
+          <Route path='/users' element={<UserPage allMessages={allMessages} setAllMessages={setAllMessages}/>} />
+          <Route path='/admin' element={<Admin allMessages={allMessages} setAllMessages={setAllMessages}/>} />
         </Routes>
         <Footer />
       </Router>

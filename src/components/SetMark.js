@@ -15,9 +15,9 @@ import {
   MDBInput,
 } from 'mdb-react-ui-kit'
 
-const SetMark = () => {
+const SetMark = (props) => {
   const [users, setUsers] = useState([])
-  const [coursess, setCourses] = useState([])
+  // const [coursess, setCourses] = useState([])
   const [userId, setUserId] = useState('')
   const [courseId, setCourseId] = useState('')
 
@@ -104,7 +104,7 @@ const SetMark = () => {
         },
       }
       axios.get(`http://localhost:5000/courses`, config).then((res) => {
-        setCourses(res.data)
+        props.setCourses(res.data)
       })
     } catch (error) {
       console.log(error)
@@ -151,7 +151,7 @@ const SetMark = () => {
                       aria-label='Default select example'
                     >
                       <option selected></option>
-                      {coursess.map((course, idx) => {
+                      {props.courses.map((course, idx) => {
                         return (
                           <option value={course._id}>{course.subject}</option>
                         )

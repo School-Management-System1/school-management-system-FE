@@ -14,10 +14,10 @@ import {
   MDBTextArea,
   MDBInput,
 } from 'mdb-react-ui-kit'
-const AddCourse = () => {
+const AddCourse = (props) => {
   const [basicModal, setBasicModal] = useState(false)
   const toggleShow = () => setBasicModal(!basicModal)
-  const [courses, setCourses] = useState([])
+  // const [courses, setCourses] = useState([])
 
   const handleAddCourse = (e) => {
     e.preventDefault()
@@ -37,7 +37,8 @@ const AddCourse = () => {
         .then((res) => {
           console.log(res.data.message)
           swal('Done!', 'Course added successfully', 'success')
-          setCourses([...courses, res.data.course])
+          props.setCourses([...props.courses,res.data.course])
+          // setCourses([...courses, res.data.course])
           toggleShow()
         })
     } catch (error) {

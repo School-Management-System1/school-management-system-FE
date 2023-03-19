@@ -20,6 +20,7 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [isError, setIsError] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const [message, setMessage] = useState('')
 
@@ -51,12 +52,15 @@ const Signup = () => {
       )
       if (response.data.message === 'User registered successfully.') {
         setIsError(false)
+        setIsSuccess(true)
         setMessage('User registered successfully!')
       } else {
         setMessage('User registered faild!')
       }
-      console.log(response.data.message)
+      // console.log(response.data.message)
+      
     } catch (err) {
+      setIsSuccess(false)
       setIsError(true)
       console.log(err)
       setMessage(err.response.data.message)
@@ -129,26 +133,24 @@ const Signup = () => {
                     marginBottom: '5px',
                     textAlign: 'center',
                     scale: '0.9',
-                    padding: '3px 5px',
-                    backgroundColor: '#EB455F',
+                    color: '#EB455F',
                   }}
                 >
                   {message}
                 </label>
-              ) : (
+              ) : isSuccess ? (
                 <label
                   style={{
                     borderRadius: '15px',
                     marginBottom: '5px',
                     textAlign: 'center',
                     scale: '0.9',
-                    padding: '7px 10px',
-                    backgroundColor: '#B6FFCE',
+                    color: 'green',
                   }}
                 >
                   {message}
                 </label>
-              )}
+              ): ''}
 
               <MDBBtn
                 type='submit'

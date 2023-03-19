@@ -9,8 +9,9 @@ import AssignCourse from './AssignCourse'
 import SetMark from './SetMark'
 import ChatMessagesAdmin from './ChatMessagesAdmin'
 
-const Admin = () => {
+const Admin = (props) => {
   const [users, setUsers] = useState([])
+  const [courses,setCourses]= useState([])
 
   const updateUser = (updatedUser) => {
     setUsers((prevUsers) =>
@@ -74,9 +75,9 @@ const Admin = () => {
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
           <AddUser users={users} setUsers={setUsers} />
-          <AddCourse />
-          <AssignCourse />
-          <SetMark />
+          <AddCourse courses={courses} setCourses={setCourses} />
+          <AssignCourse courses={courses} setCourses={setCourses} />
+          <SetMark courses={courses} setCourses={setCourses}/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <MDBTable
@@ -123,7 +124,7 @@ const Admin = () => {
           </MDBTable>
         </div>
       </div>
-      <ChatMessagesAdmin users={users} />
+      <ChatMessagesAdmin users={users} allMessages={props.allMessages} setAllMessages={props.setAllMessages}/>
     </div>
   )
 }

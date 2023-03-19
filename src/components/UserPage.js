@@ -4,7 +4,7 @@ import axios from 'axios'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit'
 import ChatMessagesUser from './ChatMessagesUser'
 
-const UserPage = () => {
+const UserPage = (props) => {
   // const { id } = useParams()
   const [userData, setUserData] = useState({
     username: '',
@@ -125,7 +125,7 @@ const UserPage = () => {
           </div>
         </div>
         {/* ddddddddddddddddddddd */}
-        <ChatMessagesUser />
+        <ChatMessagesUser allMessages={props.allMessages} setAllMessages={props.setAllMessages}/>
       </div>
     </div>
   )

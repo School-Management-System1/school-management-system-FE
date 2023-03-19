@@ -14,7 +14,7 @@ import {
 } from 'mdb-react-ui-kit'
 import '../style/chat.css'
 
-const ChatMessagesUser = () => {
+const ChatMessagesUser = (props) => {
   const [adminId, setAdminId] = useState('')
   const [allMessages, setAllMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
@@ -40,17 +40,17 @@ const ChatMessagesUser = () => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('access'))}`,
         },
       }
-      await axios.post(
+      const res=await axios.post(
         'http://localhost:5000/messages',
         { sender: userId, receiver: adminId, body: newMessage },
         config
       )
+      props.setAllMessages([...props.allMessages,res.data])
       setNewMessage('')
-      const response = await axios.get(
-        `http://localhost:5000/messages/${userId}/${adminId}`,
-        config
-      )
-      setAllMessages(response.data)
+      // const response = await axios.get(
+      //   `http://localhost:5000/messages/${userId}/${adminId}`,
+      //   config
+      // )
     } catch (error) {
       console.log(error)
     }
@@ -67,7 +67,7 @@ const ChatMessagesUser = () => {
       axios
         .get(`http://localhost:5000/messages/${adminId}/${userId}`, config)
         .then((res) => {
-          setAllMessages(res.data)
+          props.setAllMessages(res.data)
           console.log(res.data)
           //   console.log('dd');
         })
@@ -133,7 +133,7 @@ const ChatMessagesUser = () => {
             marginBottom: '200px',
           }}
         >
-          {allMessages.map((message) => {
+          {props.allMessages.map((message) => {
             return (
               <li className='d-flex justify-content-between mb-4'>
                 <img

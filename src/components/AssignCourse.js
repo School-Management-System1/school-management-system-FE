@@ -14,9 +14,9 @@ import {
   MDBModalFooter,
 } from 'mdb-react-ui-kit'
 
-const AssignCourse = () => {
+const AssignCourse = (props) => {
   const [users, setUsers] = useState([])
-  const [coursess, setCourses] = useState([])
+  // const [coursess, setCourses] = useState([])
   const [userId, setUserId] = useState('')
   const [courseId, setCourseId] = useState('')
 
@@ -102,7 +102,7 @@ const AssignCourse = () => {
         },
       }
       axios.get(`http://localhost:5000/courses`, config).then((res) => {
-        setCourses(res.data)
+        props.setCourses(res.data)
         // console.log(res.data);
       })
     } catch (error) {
@@ -151,7 +151,7 @@ const AssignCourse = () => {
                       defaultValue={courseId}
                     >
                       <option selected></option>
-                      {coursess.map((course, idx) => {
+                      {props.courses.map((course, idx) => {
                         return (
                           <option key={idx} value={course._id}>
                             {course.subject}
